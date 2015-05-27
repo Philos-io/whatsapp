@@ -9,40 +9,43 @@ var {
   NavigatorIOS
 } = React;
 
+var Contacts  = require('./tabs/contacts');
+var Chats  = require('./tabs/chats');
+var Recents  = require('./tabs/recents');
+var Favorites  = require('./tabs/favorites');
+var Settings  = require('./tabs/settings');
+
 
 var whatsapp = React.createClass({
   getInitialState(){
     return {
-      selectedTab: "chat"
+      selectedTab: "Contacts"
     }
   },
+
+  _changeTab(tab){
+    this.setState({
+      selectedTab: tab
+    });
+  },
+
   render(){
     return (
       <TabBarIOS>
-        <TabBarIOS.Item title="Favorites" selected={ this.state.selectedTab === 'Favorites' } icon={require('image!favorites')}>
-          <View style={ styles.homePage }>
-            <Text>Favorites</Text>
-          </View>
+        <TabBarIOS.Item title="Favorites" onPress={() => this._changeTab('Favorites')} selected={ this.state.selectedTab === 'Favorites' } icon={require('image!favorites')}>
+          <Favorites/>
         </TabBarIOS.Item>
-        <TabBarIOS.Item title="Recents" selected={ this.state.selectedTab === 'Recents' } icon={require('image!recents')}>
-          <View style={ styles.homePage }>
-            <Text>Recents</Text>
-          </View>
+        <TabBarIOS.Item title="Recents" onPress={() => this._changeTab('Recents')} selected={ this.state.selectedTab === 'Recents' } icon={require('image!recents')}>
+          <Recents/>
         </TabBarIOS.Item>
-        <TabBarIOS.Item title="Contacts" selected={ this.state.selectedTab === 'Contacts' } icon={require('image!contacts')}>
-          <View style={ styles.homePage }>
-            <Text>Contacts</Text>
-          </View>
+        <TabBarIOS.Item title="Contacts" onPress={() => this._changeTab('Contacts')} selected={ this.state.selectedTab === 'Contacts' } icon={require('image!contacts')}>
+          <Contacts/>
         </TabBarIOS.Item>
-        <TabBarIOS.Item title="Chats" selected={ this.state.selectedTab === 'Chats' } icon={require('image!chats')}>
-          <View style={ styles.homePage }>
-            <Text>Chats</Text>
-          </View>
+        <TabBarIOS.Item title="Chats" onPress={() => this._changeTab('Chats')} selected={ this.state.selectedTab === 'Chats' } icon={require('image!chats')}>
+          <Chats/>
         </TabBarIOS.Item>
-        <TabBarIOS.Item title="Settings" selected={ this.state.selectedTab === 'Settings' } icon={require('image!settings')}>
-          <View style={ styles.homePage }>
-            <Text>Settings</Text>
-          </View>
+        <TabBarIOS.Item title="Settings" onPress={() => this._changeTab('Settings')} selected={ this.state.selectedTab === 'Settings' } icon={require('image!settings')}>
+          <Settings/>
         </TabBarIOS.Item>
       </TabBarIOS>
     );
@@ -51,7 +54,7 @@ var whatsapp = React.createClass({
 
 var styles = StyleSheet.create({
   homePage: {
-    backgroundColor: '#',
+    backgroundColor: '#fff',
     flex: 1
   }
 });
